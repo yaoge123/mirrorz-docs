@@ -18,11 +18,10 @@ pip config set global.index-url {{endpoint}}/{{channel}}/+simple
 
 镜像中未收录的普通 PyPI 包会跳转到本站 PyPI 镜像，因此单独使用本镜像即可安装全部依赖。
 
-如果您的站点没有提供该跳转，建议把 PyPI 镜像配为补充源：
+如果您的站点没有提供该跳转，未收录的普通 PyPI 包需要显式从 PyPI（镜像）安装。参考 jetson-pypi 官方教程的做法，此时建议锁定版本号，避免 pip 在两个索引间误选到 PyPI 上的非 Jetson 构建：
 
 ```{ztmpl lang="bash" input="channel"}
-pip config set global.index-url {{endpoint}}/{{channel}}/+simple
-pip config set global.extra-index-url https://pypi.org/simple
+pip install torch==2.8.0 --index-url {{endpoint}}/{{channel}}/+simple
 ```
 
 ### Astral uv
